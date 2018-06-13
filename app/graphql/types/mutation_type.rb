@@ -1,8 +1,7 @@
-class Types::MutationType < Types::BaseObject
-  # TODO: remove me
-  field :test_field, String, null: false,
-    description: "An example field added by the generator"
-  def test_field
-    "Hello World"
-  end
+Types::MutationType = GraphQL::ObjectType.define do
+  name 'Mutation'
+
+  field :createTodo, function: Resolvers::CreateTodo.new
+  field :toggleTodo, function: Resolvers::ToggleTodo.new
+  field :updateTodo, function: Resolvers::UpdateTodo.new
 end
