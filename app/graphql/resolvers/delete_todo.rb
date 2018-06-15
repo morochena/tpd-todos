@@ -4,8 +4,9 @@ class Resolvers::DeleteTodo < GraphQL::Function
     type Types::TodoType 
 
     def call(_obj, args, _ctx)
-        Todo.find(args[:id]).destroy!
-        true
+        todo = Todo.find(args[:id])
+        todo.destroy!
+        todo
         
         rescue Mongoid::Errors::DocumentNotFound => e 
             GraphQL::ExecutionError.new("Todo does not exist!")
